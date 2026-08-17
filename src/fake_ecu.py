@@ -1,11 +1,29 @@
+import serial
+
+ser = serial.Serial("COM7", 9600)
+
 while True:
-    command = input("ECU received: ")
+    data = ser.readline()
+
+    command = data.decode().strip()
 
     if command == "START":
-        print("ECU response: OK")
+        ser.write(b"OK\n")
 
     elif command == "STOP":
-        print("ECU response: STOPPED")
+        ser.write(b"STOPPED\n")
+
+    elif command == "STATUS":
+        ser.write(b"READY\n")
+
+    elif command == "TEMP":
+        ser.write(b"25.4\n")
+
+    elif command == "EXIT":
+        ser.write(b"ECU shutting down...\n")
+        break
 
     else:
-        print("ECU response: UNKNOWN COMMAND")
+        ser.write(b"UNKNOWN COMMAND\n")
+
+ser.close()
