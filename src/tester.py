@@ -4,6 +4,8 @@ ser = serial.Serial("COM6", 9600, timeout=2)
 
 ser.write(b"START\n")
 
+print("Bytes waiting:", ser.in_waiting)
+
 response = ser.readline().decode().strip()
 
 if response == "OK":
@@ -12,3 +14,15 @@ else:
     print("TEST FAILED")
 
 ser.close()
+
+
+'''
+import serial
+
+try:
+    ser = serial.Serial("COM99", 9600, timeout=2)
+    print("Connected!")
+
+except serial.SerialException:
+    print("Could not connect to COM99")
+    '''

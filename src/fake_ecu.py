@@ -8,6 +8,7 @@ while True:
     command = data.decode().strip()
 
     if command == "START":
+        #pass
         ser.write(b"OK\n")
 
     elif command == "STOP":
